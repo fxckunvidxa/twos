@@ -1,0 +1,8 @@
+/.vscode/
+/build/bin/*
+/loader/gnu-efi/
+/image/root/twos/kernel
+*.o
+*.so
+*.efi
+*.img
