@@ -58,6 +58,6 @@ VOID LdrExit();
 EFI_PHYSICAL_ADDRESS LdrAllocPages(UINTN NumPages);
 EFI_PHYSICAL_ADDRESS LdrAllocFrame();
 EFI_PHYSICAL_ADDRESS LdrAllocZrFrame();
-VOID LdrMapPage(union PME *PML4, UINTN Virtual, UINTN Physical, BOOLEAN Page2M, UINTN Flags);
+VOID LdrMapPage(union PME *PML4, UINTN Virtual, UINTN Physical, UINTN Flags);
 VOID LdrSetupGraphics(struct efi_gop_info *bi_fb);
 UINT8 *LdrLoadFile(EFI_FILE_HANDLE Root, CHAR16 *Path, UINTN *OutSz);
