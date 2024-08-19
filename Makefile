@@ -12,21 +12,24 @@ OBJS = $(patsubst %.c, %.o, $(patsubst %.s, %.o, $(SOURCES)))
 all: clean image
 
 clean:
-	@find ./build -type f -delete
+	@rm -rf build
+	@mkdir -p build/arch/x86_64 build/bin build/sys build/misc \
+			build/video/vt_font
 
 build/bin/twos_kernel: $(OBJS)
-	@echo -e "  LD\t$@"
+	@echo "  LD      $@"
 	@$(LD) -o $@ $^ $(LDFLAGS)
 
 build/%.o: src/%.c
-	@echo -e "  CC\t$@"
+	@echo "  CC      $@"
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 build/%.o: src/%.s
-	@echo  -e "  AS\t$@"
+	@echo "  AS      $@"
 	@$(AS) $(ASFLAGS) $< -o $@
 
 image: build/bin/twos_kernel
+	@mkdir -p image/root/EFI/Boot image/root/twos/data
 	@cp -f build/bin/twos_kernel image/root/twos/kernel
 	@cp -f loader/twos_loader.efi image/root/EFI/Boot/bootx64.efi
 	@cd image && ./make_image.sh
