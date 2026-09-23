@@ -1,4 +1,4 @@
-CFLAGS = -w -I/usr/include/efi -fpermissive -fPIE -ffreestanding \
+CFLAGS = -w -I/usr/include/efi -I/usr/include/efi/x86_64 -fpermissive -fPIE -ffreestanding \
 		 -fno-stack-protector -fno-stack-check -fshort-wchar -mno-red-zone \
 		 -mno-avx -maccumulate-outgoing-args -DGNU_EFI_USE_MS_ABI
 LDFLAGS = -shared -Bsymbolic -L/usr/lib \
@@ -21,7 +21,7 @@ twos_loader.so: twos_loader.o ldr_util.o
 
 %.efi: %.so
 	@echo "  OBJCOPY $@"
-	@objcopy -j .text -j .sdata -j .data -j .dynamic -j .rodata -j .rel \
-		    -j .rela -j .rel.* -j .rela.* -j .rel* -j .rela* \
-		    -j .areloc -j .reloc --target efi-app-x86_64 $< $@
+	@objcopy -j .text -j .sdata -j .data -j .dynamic -j .dynsym -j .rodata \
+		    -j .rel -j .rela -j .rel.* -j .rela.* -j .rel* -j .rela* \
+		    -j .areloc -j .reloc --output-target efi-app-x86_64 --subsystem=10 $< $@
 	@rm *.o *.so

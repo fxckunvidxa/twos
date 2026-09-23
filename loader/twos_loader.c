@@ -35,7 +35,7 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
     BootInfo->acpi2_rsdp = NULL;
     for (UINTN i = 0; i < ST->NumberOfTableEntries; i++) {
         EFI_CONFIGURATION_TABLE *Ent = &ST->ConfigurationTable[i];
-        if (CompareGuid(&Ent->VendorGuid, &(EFI_GUID)ACPI_20_TABLE_GUID) == 0) {
+        if (CompareGuid(&Ent->VendorGuid, &(EFI_GUID)ACPI_20_TABLE_GUID)) {
             BootInfo->acpi2_rsdp = Ent->VendorTable;
             break;
         }
