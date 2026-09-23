@@ -29,4 +29,5 @@ arch_restore_ctx:
 .global arch_kthread_init
 arch_kthread_init:
     pop %rdi
+    sti
     ret
