@@ -1,5 +1,6 @@
 /.vscode/
 /build/bin/*
+/userland/build/
 /loader/gnu-efi/
 /image/root/twos/kernel
 *.o
